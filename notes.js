@@ -1,4 +1,5 @@
-let fs = require("fs")
+let fs = require("fs");
+require("colors");
 
 //.....Reading notes from the file.....
 
@@ -20,9 +21,9 @@ let addNote = function(title,body){
     if(!duplicate){
         notes.push({title,body});
         saveNotes(notes)
-        console.log("Added successfully...");  
+        console.log("Added successfully...".blue);  
     }else{
-        console.log("it is already exists...");
+        console.log("it is already exists...".red);
         
     }
 }
@@ -40,10 +41,10 @@ let removeNote = (title)=>{
     let notes = readNotes();
     let filteredNotes = notes.filter((note)=>note.title !== title);
     if(notes.length === filteredNotes.length){
-        console.log(`"${title}" not found `);
+        console.log(`"${title}" not found...`.red);
     } else{
         saveNotes(filteredNotes);
-        console.log(`"${title}" successfully removed`);
+        console.log(`"${title}" successfully removed...`.blue);
     }
 };
 
@@ -52,10 +53,9 @@ let removeNote = (title)=>{
 let listNote = () =>{
     let notes = readNotes();
     notes.forEach((note,index )=> {
-        console.log(`${index+1}.${note.title}`);
+        console.log(`${index+1}.${note.title}`.green);
     });
 };
-
 
 //.....Read a note by its title.....
 
@@ -63,12 +63,27 @@ let readNote = (title)=>{
     let notes = readNotes();
     let note = notes.find((note)=> note.title === title);
     if(note){
-        console.log(`Title: "${note.title}" Body: "${note.body}"`);
+        console.log(`Title: "${note.title}" Body: "${note.body}"`.green);
     }else{
-        console.log(`${title} not found`);
+        console.log(`${title} not found...`.red);
     }
 };
 
+//.....Edit a note by its title.....
+
+let editNote = (title,body)=>{
+    let notes = readNotes();
+    notes.forEach((element) => {
+    if(element.title === title){
+        element.body = body
+    }else{
+        console.log(`${title} not found...`.red)
+    }
+    });
+    saveNotes(notes);
+    console.log(`${title} updated successfully...`.blue);
+}
+
 //.....exporting the addNote function.....
 
-module.exports = {addNote,removeNote,listNote,readNote};
+module.exports = {addNote,removeNote,listNote,readNote,editNote};
