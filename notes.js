@@ -84,6 +84,6 @@ let editNote = (title,body)=>{
     console.log(`${title} updated successfully...`.blue);
 }
 
-//.....exporting the addNote function.....
+//.....exporting the function.....
 
 module.exports = {addNote,removeNote,listNote,readNote,editNote};
