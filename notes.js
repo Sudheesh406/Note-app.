@@ -9,7 +9,7 @@ let readNotes = ()=>{
         let dataJson = data.toString();
         return JSON.parse(dataJson)
     }catch(err){
-
+        return [];
     }
 };
 
@@ -40,7 +40,7 @@ let saveNotes = function (notes){
 let removeNote = (title)=>{
     let notes = readNotes();
     let filteredNotes = notes.filter((note)=>note.title !== title);
-    if(notes.length === filteredNotes.length){
+    if(notes.length < filteredNotes.length){
         console.log(`"${title}" not found...`.red);
     } else{
         saveNotes(filteredNotes);
@@ -72,16 +72,21 @@ let readNote = (title)=>{
 //.....Edit a note by its title.....
 
 let editNote = (title,body)=>{
+    let value = true;
     let notes = readNotes();
     notes.forEach((element) => {
     if(element.title === title){
         element.body = body
-    }else{
-        console.log(`${title} not found...`.red)
+        saveNotes(notes);
+        value = false;
     }
     });
-    saveNotes(notes);
-    console.log(`${title} updated successfully...`.blue);
+    if(!value){
+        console.log("Edited successfully...".blue);
+    }else{
+        console.log(`${title} not found...`.red);
+    }
+   
 }
 
 //.....exporting the function.....
