@@ -86,7 +86,6 @@ let editNote = (title,body)=>{
     }else{
         console.log(`${title} not found...`.red);
     }
-   
 }
 
 //.....exporting the function.....
