@@ -1,7 +1,7 @@
 let yargs = require("yargs");
 let notesJs = require("./notes");
 
-//..... Add command.....
+//..... Add note.....
 
 yargs.command({
   command: "add",
@@ -23,7 +23,7 @@ yargs.command({
   },
 });
 
-//..... Remove command.....
+//..... Remove a note.....
 
 yargs.command({
   command: "remove",

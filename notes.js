@@ -5,9 +5,9 @@ require("colors");
 
 let readNotes = ()=>{
     try{
-        let data = fs.readFileSync("notes.json");
-        let dataJson = data.toString();
-        return JSON.parse(dataJson)
+        let bufferData = fs.readFileSync("notes.json");
+        let data = bufferData.toString();
+        return JSON.parse(data)
     }catch(err){
         return [];
     }
